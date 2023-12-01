@@ -17,13 +17,18 @@ class RealTimeDataManager:
         self.data["temperatura"] += random.uniform(-1.0, 1.0)
         self.data["humedad"] += random.uniform(-2.0, 2.0)
 
-# Actualizaciones en tiempo real en segundo plano
+#Imprime los cambios cada vez que se den
+def datos_actualizados(data):
+    print("Se actualizaron los datos:",data)
 
 
+#Todo dentro de except para evitar errores
 try:
-    if __name__ == "__main__":
+    if __name__ == "__main__": 
         tiempo_real = RealTimeDataManager()
-        tiempo_real.event_manager.subscribe("Datos actualizados",datos_actualizados)    
+        tiempo_real.event_manager.subscribe("Datos actualizados",datos_actualizados)  #Callback de la función
+        
+        #Actualizaciones en tiempo real
         update_thread = threading.Thread(target=real_time_data_manager.start_real_time_updates)
         update_thread.start()
         while True:
