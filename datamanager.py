@@ -16,6 +16,7 @@ class RealTimeDataManager:
     def generate_real_time_data(self):
         self.data["temperatura"] += random.uniform(-1.0, 1.0)
         self.data["humedad"] += random.uniform(-2.0, 2.0)
+        self.event_manager.notify("Datos actualizados", self.data) #Se notifica cada cambio con ayuda de EventManager
 
 #Imprime los cambios cada vez que se den
 def datos_actualizados(data):
@@ -29,7 +30,7 @@ try:
         tiempo_real.event_manager.subscribe("Datos actualizados",datos_actualizados)  #Callback de la función
         
         #Actualizaciones en tiempo real
-        update_thread = threading.Thread(target=real_time_data_manager.start_real_time_updates)
+        update_thread = threading.Thread(target=tiempo_real.start_real_time_updates)
         update_thread.start()
         while True:
             time.sleep(1)
