@@ -1,5 +1,7 @@
 import time
 import random
+import threading
+from eventmanager import EventManager
 
 class RealTimeDataManager:
     def __init__(self):
@@ -16,13 +18,16 @@ class RealTimeDataManager:
         self.data["humedad"] += random.uniform(-2.0, 2.0)
 
 # Actualizaciones en tiempo real en segundo plano
-import threading
-update_thread = threading.Thread(target=real_time_data_manager.start_real_time_updates)
-update_thread.start()
+
 
 try:
-    while True:
-        time.sleep(1)
+    if __name__ == "__main__":
+        tiempo_real = RealTimeDataManager()
+        tiempo_real.event_manager.subscribe("Datos actualizados",datos_actualizados)    
+        update_thread = threading.Thread(target=real_time_data_manager.start_real_time_updates)
+        update_thread.start()
+        while True:
+            time.sleep(1)
 except KeyboardInterrupt:
     print("\nPrograma terminado.")
 
