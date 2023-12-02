@@ -9,15 +9,38 @@ def get_user_input():
         return get_user_input()
 
 def ejecutar_operacion(user_input, callback):
+    #Prints personalizados para cada caso
     num1, num2, operation = user_input
     if operation == '+':
+        suma = callback
+        resultado = suma(num1, num2)
+        print("El resultado de la suma es:", resultado)
     elif operation == '-':
+        resta = callback
+        resultado1 = resta(num1, num2)
+        resultado2 = resta(num2, num1)
+        print("El resultado de la resta es:", resultado1,"y el resultado de la resta invertida es:",resultado2)
     elif operation == '*':
+        multiplicacion = callback
+        resultado = multiplicacion(num1, num2)
+        print("El resultado de la suma es:", resultado)
     elif operation == '/':
+        division = callback
+        if num1 == 0 and num2 == 0: 
+            print("No se puede dividir entre cero.")
+        elif num1 == 0:
+            resultado1 = division(num1, num2)
+            print("El resultado de la división es:", resultado1,"y el resultado de la división invertida no se puede al divirse entre cero")
+        
+        elif num2 == 0:
+            resultado1 = division(num2, num1)
+            print("No se puede dividir por cero, pero el resultado de la división invertida es:",resultado1)
+        else:
+            resultado1 = division(num1, num2)
+            resultado2 = division(num2, num1)
+            print("El resultado de la división es:", resultado1,"y el resultado de la división invertida es:",resultado2)
     else:
         result = "Operacion invalida"
-    
-    print("Resultado:", result)
 
 def main():
     #Diccionario donde se encuentran las funciones a utilizar
