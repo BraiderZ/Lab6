@@ -2,7 +2,7 @@ def get_user_input():
     try:
         num1 = float(input("Ingrese un numero: "))
         num2 = float(input("Ingrese otro numero: "))
-        operation = input("Elija una operacion:\n + = suma\n - = resta\n * = multiplicación\n / = división\n O escriba 'exit' para salir: ")
+        operation = input("Elija una operacion:\n + = suma\n - = resta\n * = multiplicación\n / = división\n O escriba 'exit' para salir: ") # Menú explicativo en el caso de que un suario no recnozca los símbolos.
         return num1, num2, operation
     except ValueError:
         print("Input invalido. Por favor ingrese numeros.")
@@ -20,6 +20,14 @@ def ejecutar_operacion(user_input, callback):
     print("Resultado:", result)
 
 def main():
+    #Diccionario donde se encuentran las funciones a utilizar
+    operations = {
+        "+": lambda x, y: x + y,
+        "-": lambda x, y: x - y,
+        "*": lambda x, y:  x * y,
+        "/": lambda x, y: x/y
+    }
+
     while True:
         user_input = get_user_input()
 
